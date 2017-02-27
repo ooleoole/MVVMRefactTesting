@@ -63,7 +63,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Models\CameraOperationsModelTests.cs" />
-    <Compile Include="WorkingBehavior\MyCameraLogicKey.cs" />
+    <Compile Include="LegacyBehavior\MyCameraLogicKey.cs" />
     <Compile Include="MovmentSimulator\OrientationSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

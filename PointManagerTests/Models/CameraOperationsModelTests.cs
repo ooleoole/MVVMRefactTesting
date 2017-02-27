@@ -2,10 +2,9 @@
 using PointManager.ViewModels.UNIT;
 // Adda ref 2 "PresentationCore"
 using System.Windows.Media.Media3D;
-using Moq;
 using System;
 using System.Security.Policy;
-using PointManagerTests.Models.ConfirmedWorkingLogic;
+using PointManagerTests.LegacyBehavior;
 using PointManagerTests.MovmentSimulator;
 
 namespace PointManager.Models.Tests
@@ -85,17 +84,17 @@ namespace PointManager.Models.Tests
         }
 
         [TestMethod()]
-        public void MoveForwadXTest()
+        public void MoveForwadFullCircleTest_X()
         {
             // Arrange
             var movment = 0.1;
-            var mouseMoveDirectionFlag = true;
+            var lookDirectionFlag = true;
             //Act
             do
             {
-                mouseMoveDirectionFlag = !mouseMoveDirectionFlag;
-                OrientationSimulator.LookDirectionSimulator(_data, mouseMoveDirectionFlag);
-                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, mouseMoveDirectionFlag);
+                lookDirectionFlag = !lookDirectionFlag;
+                OrientationSimulator.LookDirectionSimulator(_data, lookDirectionFlag);
+                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, lookDirectionFlag);
                 _interaction.Move(_data, movment);
                 _confirmedLogic.Move(movment);
                 // Asssert
@@ -103,17 +102,17 @@ namespace PointManager.Models.Tests
             } while (_data.degH < 359.9 && _data.degV < 359.9 && _confirmedLogic.degV < 359.9 && _confirmedLogic.degH < 359.9);
         }
         [TestMethod()]
-        public void MoveForwadZTest()
+        public void MoveForwadFullCircleTest_Z()
         {
             // Arrange
             var movment = 0.1;
-            var mouseMoveDirectionFlag = true;
+            var lookDirectionFlag = true;
             //Act
             do
             {
-                mouseMoveDirectionFlag = !mouseMoveDirectionFlag;
-                OrientationSimulator.LookDirectionSimulator(_data, mouseMoveDirectionFlag);
-                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, mouseMoveDirectionFlag);
+                lookDirectionFlag = !lookDirectionFlag;
+                OrientationSimulator.LookDirectionSimulator(_data, lookDirectionFlag);
+                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, lookDirectionFlag);
                 _interaction.Move(_data, movment);
                 _confirmedLogic.Move(movment);
                 // Asssert
@@ -122,17 +121,17 @@ namespace PointManager.Models.Tests
 
         }
         [TestMethod]
-        public void MoveBackwardsXTest()
+        public void MoveBackwardsFullCircleTest_X()
         {
             // Arrange
             var movment = -0.1;
-            var mouseMoveDirectionFlag = true;
+            var lookDirectionFlag = true;
             //Act
             do
             {
-                mouseMoveDirectionFlag = !mouseMoveDirectionFlag;
-                OrientationSimulator.LookDirectionSimulator(_data, mouseMoveDirectionFlag);
-                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, mouseMoveDirectionFlag);
+                lookDirectionFlag = !lookDirectionFlag;
+                OrientationSimulator.LookDirectionSimulator(_data, lookDirectionFlag);
+                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, lookDirectionFlag);
                 _interaction.Move(_data, movment);
                 _confirmedLogic.Move(movment);
                 // Asssert
@@ -141,7 +140,7 @@ namespace PointManager.Models.Tests
         }
 
         [TestMethod()]
-        public void MoveBackwardsZTest()
+        public void MoveBackwardsFullCircleTest1_Z()
         {
             // Arrange
             var movment = -0.1;
@@ -161,17 +160,17 @@ namespace PointManager.Models.Tests
         }
 
         [TestMethod()]
-        public void StrafeLeftZTest()
+        public void StrafeLeftFullCircleTest_Z()
         {
             // Arrange
             var movment = -0.1;
-            var mouseMoveDirectionFlag = true;
+            var lookDirectionFlag = true;
             //Act
             do
             {
-                mouseMoveDirectionFlag = !mouseMoveDirectionFlag;
-                OrientationSimulator.LookDirectionSimulator(_data, mouseMoveDirectionFlag);
-                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, mouseMoveDirectionFlag);
+                lookDirectionFlag = !lookDirectionFlag;
+                OrientationSimulator.LookDirectionSimulator(_data, lookDirectionFlag);
+                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, lookDirectionFlag);
                 _interaction.Strafe(_data, movment);
                 _confirmedLogic.Strafe(movment);
                 // Asssert
@@ -180,22 +179,62 @@ namespace PointManager.Models.Tests
         }
 
         [TestMethod()]
-        public void StrafeRightZTest()
+        public void StrafeRightFullCircleTest_Z()
         {
             // Arrange
             var movment = 0.1;
-            var mouseMoveDirectionFlag = true;
+            var lookDirectionFlag = true;
             //Act
             do
             {
-                mouseMoveDirectionFlag = !mouseMoveDirectionFlag;
-                OrientationSimulator.LookDirectionSimulator(_data, mouseMoveDirectionFlag);
-                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, mouseMoveDirectionFlag);
+                lookDirectionFlag = !lookDirectionFlag;
+                OrientationSimulator.LookDirectionSimulator(_data, lookDirectionFlag);
+                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, lookDirectionFlag);
                 _interaction.Strafe(_data, movment);
                 _confirmedLogic.Strafe(movment);
                 // Asssert
                 Assert.IsTrue(Math.Abs(_confirmedLogic.Z - _data.Z) < 0.00001);
             } while (_data.degH < 359.9 && _data.degV < 359.9 && _confirmedLogic.degV < 359.9 && _confirmedLogic.degH < 359.9);
         }
+
+        [TestMethod()]
+        public void StrafeLeftFullCircleTest_X()
+        {
+            // Arrange
+            var movment = -0.1;
+            var lookDirectionFlag = true;
+            //Act
+            do
+            {
+                lookDirectionFlag = !lookDirectionFlag;
+                OrientationSimulator.LookDirectionSimulator(_data, lookDirectionFlag);
+                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, lookDirectionFlag);
+                _interaction.Strafe(_data, movment);
+                _confirmedLogic.Strafe(movment);
+                // Asssert
+                Assert.IsTrue(Math.Abs(_confirmedLogic.X - _data.X) < 0.00001);
+            } while (_data.degH < 359.9 && _data.degV < 359.9 && _confirmedLogic.degV < 359.9 && _confirmedLogic.degH < 359.9);
+        }
+
+
+        [TestMethod()]
+        public void StrafeRightFullCircleTest_X()
+        {
+            // Arrange
+            var movment = 0.1;
+            var lookDirectionFlag = true;
+            //Act
+            do
+            {
+                lookDirectionFlag = !lookDirectionFlag;
+                OrientationSimulator.LookDirectionSimulator(_data, lookDirectionFlag);
+                OrientationSimulator.LookDirectionSimulator(_confirmedLogic, lookDirectionFlag);
+                _interaction.Strafe(_data, movment);
+                _confirmedLogic.Strafe(movment);
+                // Asssert
+                Assert.IsTrue(Math.Abs(_confirmedLogic.X - _data.X) < 0.00001);
+            } while (_data.degH < 359.9 && _data.degV < 359.9 && _confirmedLogic.degV < 359.9 && _confirmedLogic.degH < 359.9);
+        }
+
     }
 }
