@@ -64,7 +64,6 @@
   <ItemGroup>
     <Compile Include="Models\CameraOperationsModelTests.cs" />
     <Compile Include="LegacyBehavior\MyCameraLogicKey.cs" />
-    <Compile Include="MovmentSimulator\OrientationSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
