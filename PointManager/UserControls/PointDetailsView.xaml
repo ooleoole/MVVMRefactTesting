@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="PointManager.UserControls.PointDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <StackPanel DataContext="{Binding EditCameraPosition}">
+            <TextBlock Text="Id" />
+            <TextBox Text="{Binding Id}" />
+    
+            <TextBlock Text="PositionName" />
+            <TextBox Text="{Binding PositionName}" />
+    
+            <TextBlock Text="cameraX" />
+            <TextBox Text="{Binding cameraX}" />
+    
+            <TextBlock Text="cameraY" />
+            <TextBox Text="{Binding cameraY}" />
+    
+            <TextBlock Text="cameraZ" />
+            <TextBox Text="{Binding cameraZ}" />
+    
+            <TextBlock Text="cameraDegH" />
+            <TextBox Text="{Binding cameraDegH}" />
+    
+            <TextBlock Text="cameraDegV" />
+            <TextBox Text="{Binding cameraDegV}" />
+        </StackPanel>
+        <Button Content="Save"  Command="{Binding SaveCommand}" />
+        <Button Content="Delete"  Command="{Binding DeleteCommand}" />
+        <Button Content="Cancel"  Command="{Binding CancelCommand}" />
+    </StackPanel>
+</UserControl>
