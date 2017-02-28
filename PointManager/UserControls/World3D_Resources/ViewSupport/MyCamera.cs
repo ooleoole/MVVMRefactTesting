@@ -5,8 +5,10 @@ namespace WorkInProgress.ViewSupport
     public class MyCamera
     {
         public Point3D Position { get { return _Position; } set { _Position = value; } }
-        public double degH { get { return _degH; } set { _degH = AngleInterval(value); } }
-        public double degV { get { return _degV; } set { _degV = AngleInterval(value); } }
+        public double degH { get { return _degH; }
+            set { _degH = AngleInterval(value); } }
+        public double degV { get { return _degV; }
+            set { _degV = AngleInterval(value); } }
 
         public double X { get { return _Position.X; } set { _Position.X = value; } }
         public double Y { get { return _Position.Y; } set { _Position.Y = value; } }
@@ -48,7 +50,8 @@ namespace WorkInProgress.ViewSupport
         private double AngleInterval(double deg)
         {
             if (deg > 360) return deg - 360;
-            if (deg < 0) return deg + 360; return deg; 
+            if (deg < 0) return deg + 360;
+            return deg; 
             
         }
     }

@@ -15,13 +15,20 @@ namespace PointManager.Models.Tests
         //{
         //    // initiering...
         //}
-        public double degH { get; set; }
-        public double degV { get; set; }
+        public double degH { get { return _degH; } set { _degH = AngleInterval(value); } }
+        public double degV { get { return _degV; } set { _degV = AngleInterval(value); } }
         public Point3D Position { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
+        private double _degH, _degV;
 
+        private double AngleInterval(double deg)
+        {
+            if (deg > 360) return deg - 360;
+            if (deg < 0) return deg + 360; return deg;
+
+        }
     }
     
     public class CameraOperationsModelTester : ModelBase, iCameraInteraction
@@ -30,7 +37,16 @@ namespace PointManager.Models.Tests
         private const double HalfPi = Math.PI / 180;
         public Vector3D LookDirection(iCameraProperties icp)
         {
-            throw new NotImplementedException();
+            const int dist = 3;
+            double X1 = Math.Sin(icp.degH * HalfPi) * dist,
+                   Z1 = Math.Cos(icp.degH * HalfPi) * dist;
+            return new Vector3D()
+            {
+
+                Y = (Math.Sin(icp.degV * HalfPi) * dist),
+                Z = (Math.Cos(icp.degV * HalfPi) * Z1),
+                X = (Math.Cos(icp.degV * HalfPi) * X1)
+            };
         }
 
         public void Move(iCameraProperties icp, double Distance)
@@ -68,7 +84,7 @@ namespace PointManager.Models.Tests
             _interaction = new CameraOperationsModelTester();
             _confirmedLogic = new MyCameraLogicKey { degH = 0, degV = 0, X = 1, Y = 1, Z = 1 };
         }
-        
+        [TestInitialize]
         private void MoveCamera(double steps, bool moveDirectionFlag, iCameraProperties legacyInstance, iCameraProperties newImplementationInstance)
         {
             if (moveDirectionFlag)
@@ -85,17 +101,9 @@ namespace PointManager.Models.Tests
 
         // TEstar 1,1,1,0,0
         [TestMethod()]
-        public void LookDirectionTest_pos()
+        public void LookDirection ()
         {
-            // Arrange
-
-
-            // Act
-
-            var res = _interaction.LookDirection(_data);
-
-            // Assert
-            Assert.AreEqual(res.Z, 0);
+            
         }
 
         [TestMethod()]

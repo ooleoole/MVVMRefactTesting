@@ -30,6 +30,7 @@ namespace PointManager.UserControls.World3D_Resources.Integration
 
         private void Init()
         {
+            
             this.PreviewKeyDown += xxx_MyPreviewKeyDown;
             this.PreviewKeyUp += xxx_MyPreviewKeyUp;
             //this.MouseWheel += xxx_MyMouseWheel;
