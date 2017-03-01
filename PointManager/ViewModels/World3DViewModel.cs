@@ -10,7 +10,7 @@ namespace PointManager.ViewModels
     {
         public World3DViewModel()
         {
-            System.Diagnostics.Debug.WriteLine("Ctor  World3DViewModel"+DateTime.Now);
+            System.Diagnostics.Debug.WriteLine("Ctor  World3DViewModel" + DateTime.Now);
             QuickNdirtyUIeventMgr.Instance.InteractionEvent += InteractionEventFunction;
             InitCamera();
         }
@@ -90,7 +90,7 @@ namespace PointManager.ViewModels
         private void SetCameraAngles(Point p)
         {
             //var midY = this.ActualHeight / 2;
-            var midY = 600;
+            var midY = SystemParameters.PrimaryScreenHeight / 2;
             // ned:  360-270.
             if (p.Y > midY)
             {
@@ -104,7 +104,7 @@ namespace PointManager.ViewModels
                 CamPos.degV = 90 - 90 * proc;
             }
             //var proc2 = p.X / this.ActualWidth;
-            var proc2 = p.X / 600;
+            var proc2 = p.X / SystemParameters.PrimaryScreenWidth;
             CamPos.degH = 720 - 720 * proc2;
         }
     }
