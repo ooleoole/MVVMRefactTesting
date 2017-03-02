@@ -70,6 +70,7 @@ namespace PointManager.Models.Tests
         private MyCameraLogicKey _confirmedLogic;
         private iCameraProperties _data;
         private iCameraInteraction _interaction;
+
         [TestInitialize]
         public void Initialize()
         {
@@ -99,11 +100,39 @@ namespace PointManager.Models.Tests
             }
         }
 
-        // TEstar 1,1,1,0,0
+        
         [TestMethod()]
-        public void LookDirection ()
+        public void LookDirection_X_Test()
         {
-            
+
+           // Assert.AreEqual();
+        }
+
+        [TestMethod]
+        public void RaisedCameraPositionTest()
+        {
+            // Arrange
+            var momvent = 0.1;
+            //Act
+            _data.Y =- momvent;
+            _confirmedLogic.Y =- momvent;
+            // Assert
+            Assert.IsTrue(Math.Abs(_data.Y - _confirmedLogic.Y) < 0.00001);
+
+
+        }
+        [TestMethod]
+        public void LoweredCameraPositionTest()
+        {
+            // Arrange
+            var momvent = -0.1;
+            //Act
+            _data.Y = -momvent;
+            _confirmedLogic.Y = -momvent;
+            // Assert
+            Assert.IsTrue(Math.Abs(_data.Y - _confirmedLogic.Y) < 0.00001);
+
+
         }
 
         [TestMethod()]
