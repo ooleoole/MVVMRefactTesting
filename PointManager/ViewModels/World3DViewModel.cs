@@ -1,8 +1,10 @@
 ﻿using System;
 using PointManager.UserControls.World3D_Resources.Integration;
-using WorkInProgress.ViewSupport;
+
 using System.Windows.Media.Media3D;
 using System.Windows;
+using PointManager.Models;
+using PointManager.ViewModels.UNIT;
 
 namespace PointManager.ViewModels
 {
@@ -28,18 +30,21 @@ namespace PointManager.ViewModels
         MoveMent Walk, Strafe;
         double Steps = 1;
 
-        private MyCamera _CamPos;
-        public MyCamera CamPos { get { return _CamPos; } set { _CamPos = value; OnPropertyChanged("CamPos"); } }
+        private iCameraProperties _CamPos;
+        public iCameraProperties CamPos { get { return _CamPos; } set { _CamPos = value; OnPropertyChanged("CamPos"); } }
+        private iCameraInteraction _cameraOperations;
+        public iCameraInteraction CameraOperations { get { return _cameraOperations; } set { _cameraOperations = value; OnPropertyChanged("CameraOperations"); } }
 
         private PerspectiveCamera _MyPerspectiveCamera;
         public PerspectiveCamera MyPerspectiveCamera { get { return _MyPerspectiveCamera; } set { _MyPerspectiveCamera = value; OnPropertyChanged("MyPerspectiveCamera"); } }
 
         private void InitCamera()
         {
+            CameraOperations = new CameraOperationsModel();
             MyPerspectiveCamera = new PerspectiveCamera();
-            CamPos = new MyCamera() { X = 1, Y = 0.5, Z = 0, degH = 0, degV = 0 };
-            MyPerspectiveCamera.Position = CamPos.Position;
-            MyPerspectiveCamera.LookDirection = new Vector3D(CamPos.Look.X, CamPos.Look.Y, CamPos.Look.Z);
+            CamPos = new CameraModel() { X = 1, Y = 0.5, Z = 0, degH = 0, degV = 0 };
+            MyPerspectiveCamera.Position = new Point3D(CamPos.X, CamPos.Y, CamPos.Z);
+            MyPerspectiveCamera.LookDirection = CameraOperations.LookDirection(CamPos);
         }
 
         private void StringToAction(string str)
@@ -71,18 +76,18 @@ namespace PointManager.ViewModels
 
             if (Walk != MoveMent.None)
             {
-                CamPos.Move((double)Walk * Steps * 0.1);
+                CameraOperations.Move(CamPos, (double)Walk * Steps * 0.1);
                 Walk = MoveMent.None;
             }
 
             if (Strafe != MoveMent.None)
             {
-                CamPos.Strafe((double)Strafe * Steps * 0.1);
+                CameraOperations.Strafe(CamPos,(double)Strafe * Steps * 0.1);
                 Strafe = MoveMent.None;
             }
 
-            MyPerspectiveCamera.Position = CamPos.Position;
-            MyPerspectiveCamera.LookDirection = new Vector3D(CamPos.Look.X, CamPos.Look.Y, CamPos.Look.Z);
+            MyPerspectiveCamera.Position =new Point3D(CamPos.X,CamPos.Y,CamPos.Z);
+            MyPerspectiveCamera.LookDirection = CameraOperations.LookDirection(CamPos);
             // Nödlösning för att få de interna propparna att uppdatera
             OnPropertyChanged("CamPos");
         }

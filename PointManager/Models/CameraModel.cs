@@ -5,21 +5,6 @@ namespace PointManager.Models
 {
     public class CameraModel : ModelBase, iCameraProperties
     {
-        private Point3D _Position;
-
-        public Point3D Position
-        {
-            get
-            {
-                return _Position;
-            }
-            set
-            {
-                _Position = value;
-                OnPropertyChanged("Position");
-            } 
-            
-        }
 
         private double _degH;
 

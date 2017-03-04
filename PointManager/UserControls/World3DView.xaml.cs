@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Media.Media3D;
 //using System.Windows.Input;
 using WorkInProgress.MazeFactory;
-using WorkInProgress.ViewSupport;
+
 
 
 namespace PointManager.UserControls

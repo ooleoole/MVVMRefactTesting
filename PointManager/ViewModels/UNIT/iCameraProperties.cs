@@ -4,7 +4,7 @@ namespace PointManager.ViewModels.UNIT
 {
     public  interface iCameraProperties
     {
-        Point3D Position { get; set; }
+       
         double degH { get; set; }
         double degV { get; set; }
 
