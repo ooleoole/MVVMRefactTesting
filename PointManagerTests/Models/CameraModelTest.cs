@@ -57,7 +57,7 @@ namespace PointManagerTests.Models
             var value = 5;
             //Act
             _data.Z = value;
-            _confirmedLogic.X = value;
+            _confirmedLogic.Z = value;
             //Assert
             Assert.IsTrue(_data.Z == _confirmedLogic.Z);
         }
