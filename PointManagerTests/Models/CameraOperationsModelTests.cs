@@ -90,7 +90,7 @@ namespace PointManager.Models.Tests
                 var resultFromOldLogic = _confirmedLogic.Look;
                 Assert.IsTrue(resultFromOldLogic.Y == resultFromNewLogic.Y);
             } while (_data.degH < 359.9 && _data.degV < 359.9 && _confirmedLogic.degV < 359.9 && _confirmedLogic.degH < 359.9);
-            // Assert
+            
             
         }
 
