@@ -11,26 +11,16 @@ namespace PointManager.Models.Tests
 {
     public class CameraPropertiesTester : ModelBase, iCameraProperties
     {
-        //public CameraPropertiesTester()
-        //{
-        //    // initiering...
-        //}
-        public double degH { get { return _degH; } set { _degH = AngleInterval(value); } }
-        public double degV { get { return _degV; } set { _degV = AngleInterval(value); } }
+        
+        public double degH { get; set; }
+        public double degV { get; set; }
         public Point3D Position { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
-        private double _degH, _degV;
-
-        private double AngleInterval(double deg)
-        {
-            if (deg > 360) return deg - 360;
-            if (deg < 0) return deg + 360; return deg;
-
-        }
+        
     }
-    
+
     public class CameraOperationsModelTester : ModelBase, iCameraInteraction
     {
 
@@ -100,12 +90,59 @@ namespace PointManager.Models.Tests
             }
         }
 
-        
+
         [TestMethod()]
         public void LookDirection_X_Test()
         {
+            // Arrange
+            var movment = 0.1;
+            var moveDirectionFlag = true;
+            // Act
+            do
+            {
+                moveDirectionFlag = !moveDirectionFlag;
+                MoveCamera(movment, moveDirectionFlag, _confirmedLogic, _data);
+                var resultFromNewLogic = _interaction.LookDirection(_data);
+                var resultFromOldLogic = _confirmedLogic.Look;
+                Assert.IsTrue(resultFromOldLogic.X == resultFromNewLogic.X);
+            } while (_data.degH < 359.9 && _data.degV < 359.9 && _confirmedLogic.degV < 359.9 && _confirmedLogic.degH < 359.9);
+            // Assert.AreEqual();
+        }
+        [TestMethod]
+        public void LookDirection_Y_Test()
+        {
+            // Arrange
+            var movment = 0.1;
+            var moveDirectionFlag = true;
+            // Act
+            do
+            {
+                moveDirectionFlag = !moveDirectionFlag;
+                MoveCamera(movment, moveDirectionFlag, _confirmedLogic, _data);
+                var resultFromNewLogic = _interaction.LookDirection(_data);
+                var resultFromOldLogic = _confirmedLogic.Look;
+                Assert.IsTrue(resultFromOldLogic.Y == resultFromNewLogic.Y);
+            } while (_data.degH < 359.9 && _data.degV < 359.9 && _confirmedLogic.degV < 359.9 && _confirmedLogic.degH < 359.9);
+            // Assert
+            
+        }
 
-           // Assert.AreEqual();
+        [TestMethod]
+        public void LookDirection_Z_Test()
+        {
+            // Arrange
+            var movment = 0.1;
+            var moveDirectionFlag = true;
+            // Act
+            do
+            {
+                moveDirectionFlag = !moveDirectionFlag;
+                MoveCamera(movment, moveDirectionFlag, _confirmedLogic, _data);
+                var resultFromNewLogic = _interaction.LookDirection(_data);
+                var resultFromOldLogic = _confirmedLogic.Look;
+                Assert.IsTrue(resultFromOldLogic.Z == resultFromNewLogic.Z);
+            } while (_data.degH < 359.9 && _data.degV < 359.9 && _confirmedLogic.degV < 359.9 && _confirmedLogic.degH < 359.9);
+            // Assert.AreEqual();
         }
 
         [TestMethod]
@@ -114,8 +151,8 @@ namespace PointManager.Models.Tests
             // Arrange
             var momvent = 0.1;
             //Act
-            _data.Y =- momvent;
-            _confirmedLogic.Y =- momvent;
+            _data.Y = -momvent;
+            _confirmedLogic.Y = -momvent;
             // Assert
             Assert.IsTrue(Math.Abs(_data.Y - _confirmedLogic.Y) < 0.00001);
 
@@ -134,6 +171,7 @@ namespace PointManager.Models.Tests
 
 
         }
+        
 
         [TestMethod()]
         public void MoveForwadInAllDirectionsTest_X()
@@ -145,7 +183,7 @@ namespace PointManager.Models.Tests
             do
             {
                 moveDirectionFlag = !moveDirectionFlag;
-                MoveCamera(movment, moveDirectionFlag,_confirmedLogic,_data);
+                MoveCamera(movment, moveDirectionFlag, _confirmedLogic, _data);
                 _interaction.Move(_data, movment);
                 _confirmedLogic.Move(movment);
                 // Asssert
@@ -153,7 +191,7 @@ namespace PointManager.Models.Tests
             } while (_data.degH < 359.9 && _data.degV < 359.9 && _confirmedLogic.degV < 359.9 && _confirmedLogic.degH < 359.9);
         }
 
-        
+
 
         [TestMethod()]
         public void MoveForwadInAllDirectionTest_Z()

@@ -23,22 +23,10 @@ namespace PointManager.Models
 
         private double _degH;
 
-        public double degH
-        {
-            get
-            {
-                return _degH;
-            }
-            set
-            {
-                _degH = value;
-                OnPropertyChanged("degH");
-            }
-        }
+        public double degH { get { return _degH; } set { _degH = AngleInterval(value); OnPropertyChanged("degH"); } }
 
         private double _degV;
-        public double degV { get { return _degV; } set { _degV = value; OnPropertyChanged("degV"); } }
-
+        public double degV { get { return _degV; } set { _degV = AngleInterval(value); OnPropertyChanged("degV");} }
         private double _X;
         public double X { get { return _X; } set { _X = value; OnPropertyChanged("X"); } }
 
@@ -47,5 +35,12 @@ namespace PointManager.Models
 
         private double _Z;
         public double Z { get { return _Z; } set { _Z = value; OnPropertyChanged("Z"); } }
+
+        private double AngleInterval(double deg)
+        {
+            if (deg > 360) return deg - 360;
+            if (deg < 0) return deg + 360; return deg;
+
+        }
     }
 }

@@ -62,6 +62,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Models\CameraModelTest.cs" />
     <Compile Include="Models\CameraOperationsModelTests.cs" />
     <Compile Include="LegacyBehavior\MyCameraLogicKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
